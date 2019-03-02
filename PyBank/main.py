@@ -5,17 +5,40 @@ import csv
 
 csvpath = "C:\\Users\\ellis\\Downloads\\budget.csv"
 
-with open(csvpath, newline='') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=',')
-    csv_header = next(csvreader)
-    
-def Analysis(fin_data):
-    months = int(sum(fin_data[0]))
-    total_amount = int(sum(fin_data[1]))
-    mon_max = int(max(fin_data[1]))
-    mon_min = int(min(fin_data[1]))
+TotalMonths = 0
+TotalDollars = 0
+Avg = 0.0
+MaxProfit = 0
+MaxDate = ""
+MinProfit = 0
+MinDate = ""
 
-    print(f"Total Months: {str(months)}")
-    print(f"Total: {str(total_amount)}")
-    print(f"Greatest Increase in Profits: {str(mon_max)}")
-    print(f"Greatest Decrease in Profits: {str(mon_min)}")
+
+
+with open(csvpath, newline ='') as csvfile:
+    budgetdata = csv.reader(csvfile, delimiter =',')
+    csv_header = next(budgetdata)
+  
+    print(csv_header)    
+
+    for row in budgetdata:
+        TotalMonths = 1 + TotalMonths
+        TotalDollars = TotalDollars + int(row[1])
+        Aveg = TotalDollars/TotalMonths
+
+        if (int(row[1]) > MaxProfit):
+            MaxProfit = int(row[1])
+            MaxDate = row[0]
+
+        if (int(row[1]) < MinProfit):
+            MinProfit = int(row[1])
+            MinDate = row[0]
+
+
+print("Financial Analysis")
+print("----------------------------------------------------------------------------------------------")
+print("Total Months: " + str(TotalMonths))
+print("Total: " + str(TotalDollars))
+print("Average Change: " + str(Aveg))
+print("Greatest Increase in Profits occured on Date: " + MaxDate + " with an amount of " + str(MaxProfit))
+print("Greatest Decrease in Profits occured on Date: " + MinDate + " with an amount of " + str(MinProfit))
