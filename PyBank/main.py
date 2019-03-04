@@ -24,7 +24,7 @@ with open(csvpath, newline ='') as csvfile:
     for row in budgetdata:
         TotalMonths = 1 + TotalMonths
         TotalDollars = TotalDollars + int(row[1])
-        Aveg = TotalDollars/TotalMonths
+        Avg = TotalDollars/TotalMonths
 
         if (int(row[1]) > MaxProfit):
             MaxProfit = int(row[1])
@@ -37,8 +37,17 @@ with open(csvpath, newline ='') as csvfile:
 
 print("Financial Analysis")
 print("----------------------------------------------------------------------------------------------")
-print("Total Months: " + str(TotalMonths))
-print("Total: " + str(TotalDollars))
-print("Average Change: " + str(Aveg))
-print("Greatest Increase in Profits occured on Date: " + MaxDate + " with an amount of " + str(MaxProfit))
-print("Greatest Decrease in Profits occured on Date: " + MinDate + " with an amount of " + str(MinProfit))
+print(f"Total Months: {str(TotalMonths)}")
+print(f"Total: {str(TotalDollars)}")
+print(f"Average Change: {str(Avg)}")
+print(f"Greatest Increase in Profits occured on Date: {MaxDate} with an amount of {str(MaxProfit)}")
+print(f"Greatest Decrease in Profits occured on Date:{MinDate} with an amount of {str(MinProfit)}")
+
+with open("Financial_Analysis.txt","w") as txtfile:
+    txtfile.write(f"Financial Analysis\n")
+    txtfile.write(f"------------------\n")
+    txtfile.write(f"Total Months: {str(TotalMonths)}\n")
+    txtfile.write(f"Average Change: {str(Avg)}\n")
+    txtfile.write(f"Total: + str(TotalDollars)\n")
+    txtfile.write(f"Greatest Increase in Profits occured on Date: {MaxDate} with an amount of {str(MaxProfit)}\n")
+    txtfile.write(f"Greatest Decrease in Profits occured on Date:{MinDate} with an amount of {str(MinProfit)}\n")
